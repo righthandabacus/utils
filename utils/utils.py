@@ -12,8 +12,8 @@ import smtplib
 import sys
 
 __all__ = [
-        "exception_hook", "print_tb_with_local", "supports_color", "get_logger", "readyaml",
-        "email", "readxml", "curl", "splitby"
+    "exception_hook", "print_tb_with_local", "supports_color", "get_logger",
+    "readyaml", "email", "readxml", "curl", "splitby"
 ]
 
 
@@ -125,8 +125,8 @@ def _loglevelcode(levelstring):
             return levelcode
     return None # not recognized
 
-def get_logger(root=None, level=logging.DEBUG, filename=None, stream=None, console=True,
-               filelevel=None, reset=False):
+def get_logger(root=None, level=logging.DEBUG, filename=None, filelevel=None,
+               stream=None, console=True, reset=False):
     """Configurating the logging facilities to log possibly to both console and
     file. You should only run this once at the root level and subsequently use
     logging.getLogger() to get a subordinate logger.
@@ -136,10 +136,10 @@ def get_logger(root=None, level=logging.DEBUG, filename=None, stream=None, conso
         level (int): the logging level to use for console, default at debug. This also
                 accepts string name of the logging level
         filename (str): if provided, log will be appended to the file
+        filelevel (int): the logging level to use for file, default is same as console's level
         stream (file-like object): if provided, write log to a stream object,
                such as StringIO buffer
         console (bool): whether to print log to console
-        filelevel (int): the logging level to use for file, default is same as console's level
         reset (bool): delete all existing log handler of the root logger if set to True
     Returns:
         a python logger object
