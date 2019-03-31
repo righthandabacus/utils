@@ -1,1 +1,3 @@
-Some generic utils for other projects
+# utils
+
+Some generic `utils` for other projects

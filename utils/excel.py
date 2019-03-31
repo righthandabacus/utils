@@ -6,6 +6,8 @@ Excel formatting related functions
 The measurement data are from https://bitbucket.org/jky/cpytoxlsf.py
 """
 
+__all__ = ["pixel2colwidth", "str2pixels"]
+
 # Font measurement data in pixel width: Calibri 11 normal and bold
 CALIBRI = {c: w for s, w in {
     'W@': 377.01 / 28,
@@ -61,7 +63,7 @@ def pixel2colwidth(pixel_width: float) -> float:
         # subsequent col width unit = 7 pixel
         return (pixel_width - 5.0)/7.0
 
-def strwidth(s: str, font: str) -> float:
+def str2pxels(s: str, font: str) -> float:
     """Return string width in pixels. Only limited fonts are allowed.
 
     Args:
