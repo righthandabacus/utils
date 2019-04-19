@@ -19,7 +19,7 @@ def unicoderemove(s, category_check):
         The unicode string of input transformed into normal form KD (compatibility
         decomposition) with characters of the specified categories removed
     '''
-    assert isinstance(s, str):
+    assert isinstance(s, str)
     return "".join(c for c in unicodedata.normalize('NFKD',s) if category_check(unicodedata.category(c)))
 
 def unicodereplace(s, replacer, category_check):

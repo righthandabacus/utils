@@ -18,6 +18,12 @@ import utils
 
 packages = find_packages(exclude=['contrib', 'docs', 'tests'])  # py module name
 package_data = {
+    "utils": [
+        'web/download_img.js',
+        'web/get_elements.js',
+        'web/get_everything.js',
+        'web/get_xpath.js',
+    ]
 }
 requires = [
     "pipe",

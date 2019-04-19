@@ -22,6 +22,9 @@ class browser:
                 options = webdriver.ChromeOptions()
             options.add_argument('window-size={}x{}'.format(width, height))
             options.add_argument('disable-web-security')  # allow cross-site XHR to download images
+            # use user prefs:
+            # options.add_argument('user-data-dir=Users/<username>/Library/Application Support/Google/Chrome/Default')
+            # mac dir: Users/<username>/Library/Application Support/Google/Chrome/Default
             if headless:
                 options.add_argument('headless') # run headless Chrome
             self._driver = webdriver.Chrome(options=options)

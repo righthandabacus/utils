@@ -63,7 +63,7 @@ def pixel2colwidth(pixel_width: float) -> float:
         # subsequent col width unit = 7 pixel
         return (pixel_width - 5.0)/7.0
 
-def str2pxels(s: str, font: str) -> float:
+def str2pixels(s: str, font: str) -> float:
     """Return string width in pixels. Only limited fonts are allowed.
 
     Args:

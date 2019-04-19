@@ -15,7 +15,7 @@ from .iters import take, prepend, tabulate, tail, consume, nth, all_equal, \
         unique_justseen, iter_except, first_true, random_product, \
         random_permutation, random_combination, \
         random_combination_with_replacement, nth_combination
-from .unicodedata import unicoderemove, unicodereplace, \
+from .unicode import unicoderemove, unicodereplace, \
         deaccent, depunctuation, \
         lettersOnly, digitsOnly, lettersTokens
 from .excel import pixel2colwidth, str2pixels
