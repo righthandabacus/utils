@@ -14,7 +14,7 @@ CWD = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(CWD, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-import utils
+import my_utils
 
 packages = find_packages(exclude=['contrib', 'docs', 'tests'])  # py module name
 package_data = {
@@ -40,14 +40,14 @@ classifiers = [
 ]
 
 setup(
-    name = 'utils',
+    name = 'my_utils',  # need a weird name to prevent conflict
     description = 'Generic tools for Python projects',
-    version = utils.__version__,
+    version = my_utils.__version__,
 
     long_description = long_description,
     long_description_content_type = 'text/markdown',
-    author = utils.__author__,
-    author_email = utils.__author_email__,
+    author = my_utils.__author__,
+    author_email = my_utils.__author_email__,
 
     # Look for package directories automatically
     packages = packages,

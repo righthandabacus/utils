@@ -48,9 +48,9 @@ deaccent = lambda s : unicoderemove(s, lambda c: c!='Mn').replace('\u02b9','')
 depunctuation = lambda s : unicodereplace(s, ' ', lambda c: c not in ['Pc','Pd','Pe','Pf','Pi','Po','Ps'])
 
 # Keep only letters, all CJK ideographs are defined as other letters (Lo)
-lettersOnly = lambda s : unicoderemove(s, lambda c: c in ['Ll','Lm','Lo','Lt','Lu'])
-digitsOnly = lambda s : unicoderemove(s, lambda c: c == 'Nd')
-lettersTokens = lambda s : unicodereplace(s, ' ', lambda c: c in ['Ll','Lm','Lo','Lt','Lu'])
+letters_only = lambda s : unicoderemove(s, lambda c: c in ['Ll','Lm','Lo','Lt','Lu'])
+digits_only = lambda s : unicoderemove(s, lambda c: c == 'Nd')
+letters_tokens = lambda s : unicodereplace(s, ' ', lambda c: c in ['Ll','Lm','Lo','Lt','Lu'])
 
 
 # vim:set ts=4 sw=4 sts=4 tw=100 fdm=indent et:

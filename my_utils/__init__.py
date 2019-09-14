@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __author__ = 'Adrian Tam'
-__date__ = "2019-03-31"
+__date__ = "2019-09-14"
 __author_email__ = 'adrian.sw.tam@gmail.com'
 
 from .feeds import add_feed_data_ver, get_feed_data, is_feed, is_base_feed, \
@@ -17,7 +17,7 @@ from .iters import take, prepend, tabulate, tail, consume, nth, all_equal, \
         random_combination_with_replacement, nth_combination
 from .unicode import unicoderemove, unicodereplace, \
         deaccent, depunctuation, \
-        lettersOnly, digitsOnly, lettersTokens
+        letters_only, digits_only, letters_tokens
 from .excel import pixel2colwidth, str2pixels
 try:
     from .web.browser import browser
