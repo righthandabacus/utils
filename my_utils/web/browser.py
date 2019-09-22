@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*-
+
+"""A browser class as a wrapper for selenium
+"""
+
 import os
 import signal
-from contextlib import contextmanager
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -16,9 +20,9 @@ class browser:
     def __init__(self, width=1200, height=800, driver="chrome", headless=True, **kwargs):
         """create and initialize selenium"""
         if driver == "chrome":
-            if 'chrome_options' in kwargs:
+            try:
                 options = kwargs['chrome_options']
-            else:
+            except KeyError:
                 options = webdriver.ChromeOptions()
             options.add_argument('window-size={}x{}'.format(width, height))
             options.add_argument('disable-web-security')  # allow cross-site XHR to download images
@@ -65,10 +69,12 @@ class browser:
             self._driver = None
 
     def user_agent(self):
+        """return the browser user-agent string"""
         return self._driver.execute_script("return navigator.userAgent")
 
     def cookies(self):
-        biscus = self_driver.manage().cookies()
+        """return all cookies as a python dict"""
+        biscus = self._driver.manage().cookies()
         if not biscus:
             # IE and FF, cannot read cookies like above
             cookiestring = self._driver.execute_script("return document.cookie")
@@ -76,7 +82,7 @@ class browser:
             for cookie in cookiestring.split("; "):
                 key, val = cookie.split("=", 1)
                 biscus[key] = val
-        return buscus
+        return biscus
 
     def __getattr__(self, name):
         """pass through all unrecognized webdriver functions and attributes"""
@@ -134,6 +140,7 @@ class browser:
         element = self._driver.find_element_by_id("base64imagedownload")  # expect implicit wait
         if element:
             return self._driver.execute_script("return document.getElementById('base64download').textContent")
+        return None  # failed to download the image
 
 def _example():
     "Example of using webdriver"

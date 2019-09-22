@@ -8,12 +8,13 @@ import io
 import logging
 import mimetypes
 import os
+import os.path
 import smtplib
 import sys
 
 __all__ = [
     "exception_hook", "print_tb_with_local", "supports_color", "get_logger",
-    "readyaml", "email", "readxml", "curl", "splitby"
+    "readxml", "readkeyval", "readyaml", "email", "curl", "sieve", "flatten", "subdict"
 ]
 
 
@@ -211,7 +212,7 @@ def readxml(filename, retain_namespace=False):
         lxml etree DOM of the XML
     """
     from lxml import etree
-    dom = etree.parse(filename)
+    dom = etree.parse(os.path.expanduser(filename))
     if not retain_namespace:
         # XSLT from https://stackoverflow.com/questions/4255277
         xslt = """
@@ -242,6 +243,29 @@ def readxml(filename, retain_namespace=False):
         dom = transform(dom)
     return dom
 
+def readkeyval(filename):
+    """Load a text file of key=val lines and return a dictionary. Comments can
+    be started with # char and run up to the end of line. Supposed to be used as
+    a config file
+
+    Args:
+        filename (str): Filename, assumed accessible by open()
+    Returns:
+        Dictionary of the corresponding key=val context
+    """
+    COMMENT_CHAR, OPTION_CHAR = '#', '='
+    options = {}
+    with open(os.path.expanduser(filename), 'r') as fp:
+        for line in fp:
+            # remove comments from a line
+            if COMMENT_CHAR in line:
+                line, _ = line.split(COMMENT_CHAR, 1)
+            # parse key=value
+            if OPTION_CHAR in line:
+                option, value = line.split(OPTION_CHAR, 1)
+                options[option.strip()] = value.strip()
+    return options
+
 def readyaml(filename):
     """Load a YAML file and return a dictionary. Supposed to be used as a config
     file.
@@ -256,7 +280,7 @@ def readyaml(filename):
         IOError if cannot read filename, AssertionError if the YAML read is not a dictionary
     """
     import yaml
-    data = yaml.load(open(filename))
+    data = yaml.load(open(os.path.expanduser(filename)))
     assert isinstance(data, dict)
     return data
 
@@ -376,5 +400,8 @@ def flatten(sequence, types=None, checker=lambda x:hasattr(x,'__iter__')):
                 yield z
         else:
             yield x
+
+# strip down an input dict to keep only some specified keys
+subdict = lambda _dict, _keys: {k:v for k,v in _dict.items() if k in _keys}
 
 # vim:set ts=4 sw=4 sts=4 tw=100 fdm=indent et:

@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '0.0.3'
+"""Generic and reusable functions"""
+
+__version__ = '0.0.4'
 __author__ = 'Adrian Tam'
-__date__ = "2019-09-14"
+__date__ = "2019-09-21"
 __author_email__ = 'adrian.sw.tam@gmail.com'
 
 from .feeds import add_feed_data_ver, get_feed_data, is_feed, is_base_feed, \
         list_feed_data_vers, list_feed_subfeeds, list_feed_vers, list_feeds
-from .utils import curl, email, exception_hook, get_logger, \
-        print_tb_with_local, readxml, readyaml, sieve, supports_color
+from .utils import exception_hook, print_tb_with_local, supports_color, \
+        get_logger, readxml, readkeyval, readyaml, email, curl, sieve, flatten, \
+        subdict
 from .iters import take, prepend, tabulate, tail, consume, nth, all_equal, \
         quantify, padnone, ncycles, dotproduct, flatten, repeatfunc, pairwise, \
         grouper, roundrobin, partition, powerset, unique_everseen, \
