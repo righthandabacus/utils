@@ -91,7 +91,17 @@ class browser:
     def wait_until_staled(self, element, timeout=30):
         WebDriverWait(self._driver, timeout).until(staleness_of(element))
 
+    def is_ready(self):
+        """Return True iff the page is loaded"""
+        return self._driver.execute_script("return document.readyState === 'complete'")
+
     def get_everything(self):
+        """Extract everything from the DOM
+        Returns:
+            A list of lists, each of them has the following elements:
+            ['element','xpath','visible','x','y','w','h','fg','bg','font','attrs','text','html']
+            which element is the DOM object and other are string or numbers
+        """
         scriptpath = os.path.join(__FILEDIR, 'get_everything.js')
         js = open(scriptpath).read()
         ret = self._driver.execute_script(js)
