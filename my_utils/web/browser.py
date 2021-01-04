@@ -91,6 +91,20 @@ class browser:
     def wait_until_staled(self, element, timeout=30):
         WebDriverWait(self._driver, timeout).until(staleness_of(element))
 
+    def wait_until_ready(self, timeout=30):
+        """Use Selenium mechanism to wait until page ready. Behind the scene, it is
+        calling the boolean function once every 500ms until True is returned. See
+        https://selenium-python.readthedocs.io/waits.html
+        """
+        class page_ready:
+            def __call__(self, driver):
+                return driver.execute_script("return document.readyState === 'complete'")
+        WebDriverWait(self._driver, timeout).until(page_ready())
+
+    # TODO more robust waiting functions
+    #   - this may work: self._driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS)
+    #   - SO discussion: https://stackoverflow.com/questions/15122864/selenium-wait-until-document-is-ready
+
     def is_ready(self):
         """Return True iff the page is loaded"""
         return self._driver.execute_script("return document.readyState === 'complete'")
@@ -130,10 +144,6 @@ class browser:
     def save_rendered_html(self, filename):
         html = self._driver.execute_script('return document.documentElement.outerHTML;')
         open(filename, 'wb').write(html.encode('utf8'))
-
-    def is_page_ready(self):
-        state = self._driver.execute_script('return document.readyState')
-        return state == 'complete'
 
     def capture_image(self, url):
         """re-fetch the URL image and convert it into base64 encoded binary,

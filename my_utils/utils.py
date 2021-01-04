@@ -29,7 +29,8 @@ def exception_hook(hooktype="trace"):
     """
     assert hooktype in ["trace", "debug", "local"]
     if hooktype == "trace":
-        pass # assume system default is intact
+        # reset system default
+        sys.excepthook = sys.__excepthook__
     elif hooktype == "debug":
         def debughook(etype, value, tb):
             "Launch post-mortem debugger"

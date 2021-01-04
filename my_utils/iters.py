@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Itertools recipes from Python doc
+now also available as more-itertools
 """
 
 import collections

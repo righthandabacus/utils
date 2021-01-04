@@ -2,9 +2,9 @@
 
 """Generic and reusable functions"""
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 __author__ = 'Adrian Tam'
-__date__ = "2019-09-21"
+__date__ = "2021-01-04"
 __author_email__ = 'adrian.sw.tam@gmail.com'
 
 from .feeds import add_feed_data_ver, get_feed_data, is_feed, is_base_feed, \
