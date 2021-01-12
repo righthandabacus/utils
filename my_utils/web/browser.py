@@ -96,10 +96,7 @@ class browser:
         calling the boolean function once every 500ms until True is returned. See
         https://selenium-python.readthedocs.io/waits.html
         """
-        class page_ready:
-            def __call__(self, driver):
-                return driver.execute_script("return document.readyState === 'complete'")
-        WebDriverWait(self._driver, timeout).until(page_ready())
+        WebDriverWait(self._driver, timeout).until(lambda doc: doc.is_ready())
 
     # TODO more robust waiting functions
     #   - this may work: self._driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS)
