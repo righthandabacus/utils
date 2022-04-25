@@ -43,8 +43,15 @@ class browser:
             self._driver = webdriver.PhantomJS(desired_capabilities=dcap, service_log_path=os.path.devnull)
             self._driver.set_window_size(width, height)
         elif driver == "firefox":
-            # TODO enrich this
-            self._driver = webdriver.Firefox()
+            try:
+                options = kwargs['firefox_options']
+            except KeyError:
+                options = webdriver.FirefoxOptions()
+            options.add_argument("--width={}".format(width))
+            options.add_argument("--height={}".format(height))
+            if headless:
+                options.set_headless() # run headless Firefox
+            self._driver = webdriver.Firefox(firefox_options=options)
         else:
             raise NotImplementedError("Unrecognized driver %s" % driver)
 
